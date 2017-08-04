@@ -1,3 +1,7 @@
+# Trying out Material Design 
+It's on the Version 2 (please check it out if you need :) )
+
+
 # DNA Sequencing
 Project forked from Angular Seed
 
