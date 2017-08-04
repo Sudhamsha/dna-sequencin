@@ -1,5 +1,5 @@
 # Trying out Material Design 
-It's on the Version 2 (please check it out if you need :) )
+It's on the Version 2 (please check it out if you want :) )
 
 
 # DNA Sequencing
