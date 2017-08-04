@@ -1,0 +1,39 @@
+<div class="container" style="margin-top: 100px;">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">All Reads</h3>
+        </div>
+
+
+        <div class="panel-body">
+
+            <div read-list items='items'></div>
+        </div>
+        <div class="panel-footer clearfix">
+            <a href="javascript:void(0)" class="pull-right" ng-click="addReadItems($event)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add</a>
+            <a href="javascript:void(0)" class="pull-right" ng-click="saveReads()" style="margin-right: 10px"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Save</a>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Summary</h3>
+        </div>
+
+
+        <div class="panel-body">
+
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="(key, value) in total">
+                    Read {{(key * 1) + (1)}} {{ value }}
+                </li>
+                <li class="list-group-item" >
+                    Total: {{ totalLength }}
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+

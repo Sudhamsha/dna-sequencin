@@ -1,0 +1,28 @@
+<div class="panel panel-default" ng-repeat="readItem in ctrl.items">
+
+    <div class="panel-heading">
+        <h3 class="panel-title pull-left">Read {{$index + 1}}</h3>
+        <div class="panel-title pull-right glyphicon glyphicon-trash" style="cursor: pointer" ng-click="removeRead($index)"></div>
+            <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+
+        <input type="text" class="form-control pull-left" data-ng-model="name" ng-value="readItems.name[$index]? readItems.name[$index] : readItem.readName" ng-change="checkDNA($index)" aria-describedby="basic-addon1" style="width:80%">
+        <button class="pull-left" style="margin-left: 10px;" ng-click="randomDNA($index)">Generate</button>
+        <div style="width: 50%; margin-top: 50px" class="clearfix">
+            <input type="text" class="form-control" ng-model="search" ng-change="searchRead(search, $index)" placeholder="Search" aria-describedby="basic-addon1">
+        </div>
+
+
+        <div style="margin-top: 10px;">
+            <span>Found: {{total[$index]}}</span>
+                <br />
+            <span>
+                {{ positions[$index]['text'] }}
+                <span class="glyphicon glyphicon-chevron-left" style="cursor: pointer;" ng-click="prevOccurence(search, $index, positions[$index]['current_position'], positions[$index]['counter'])"></span>
+                <span class="glyphicon glyphicon-chevron-right" style="cursor: pointer;" ng-click="nextOccurence(search, $index, positions[$index]['current_position'], positions[$index]['counter'])"></span>
+            </span>
+        </div>
+
+    </div>
+</div>
