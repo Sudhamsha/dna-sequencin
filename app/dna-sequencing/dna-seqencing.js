@@ -9,7 +9,7 @@ angular.module('myApp.dnaSequencing', ['ngRoute'])
         });
     }])
 
-    .controller('DNASequencing', ['$scope', '$http', function($scope, $http) {
+    .controller('DNASequencing', ['$scope', '$http', '$mdToast', function($scope, $http, $mdToast) {
 
         $scope.total = {};
         $scope.totalLen = {};
@@ -21,7 +21,6 @@ angular.module('myApp.dnaSequencing', ['ngRoute'])
                 alert("Problem Getting reads");
             });
         };
-
 
         $scope.addReadItems = function(e) {
             console.log("h");
@@ -50,7 +49,15 @@ angular.module('myApp.dnaSequencing', ['ngRoute'])
         };
 
         $scope.removeRead = function (index) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent('READ removed, please click on save to apply!')
+                    .position({ bottom: true, right: true} )
+                    .hideDelay(3000)
+            );
             $scope.items.splice(index, 1);
+
+
         };
 
 
@@ -83,10 +90,9 @@ angular.module('myApp.dnaSequencing', ['ngRoute'])
         $scope.nextOccurence = function (search, index, currentPosition, counter) {
             if(counter + 1 <= $scope.total[index]){
                 $scope.positions[index]['counter'] = counter + 1;
-                $scope.positions[index]['text'] = "#"+$scope.positions[index]['counter'] +" at position" + $scope.items[index].readName.indexOf(search, currentPosition+1);
+                $scope.positions[index]['text'] = "#"+$scope.positions[index]['counter'] +" at position " + $scope.items[index].readName.indexOf(search, currentPosition+1);
                 $scope.positions[index]['current_position'] = $scope.items[index].readName.indexOf(search, currentPosition+1);
             }
-
 
         };
 
@@ -106,12 +112,4 @@ angular.module('myApp.dnaSequencing', ['ngRoute'])
 
         // Initialise on load
         $scope.init();
-    }])
-    .filter('highlight', function($sce) {
-        return function(text, phrase) {
-            if (phrase) text = text.replace(new RegExp('('+phrase+')', 'gi'),
-                '<span class="highlighted">$1</span>')
-
-            return $sce.trustAsHtml(text)
-        }
-    })
+    }]);

@@ -1,18 +1,15 @@
 <md-card ng-repeat="readItem in ctrl.items">
-
     <md-card-title>
         <md-card-title-text>
             <span class="md-headline">Read {{$index + 1}}</span>
         </md-card-title-text>
     </md-card-title>
 
-    <!--<div class="panel-title pull-right glyphicon glyphicon-trash" style="cursor: pointer" ng-click="removeRead($index)"></div>-->
-
     <md-card-content>
         <div layout="row" flex>
             <md-input-container flex class="md-block">
                 <label>READ</label>
-                <input md-maxlength="150" required md-no-asterisk name="name" ng-model="name"  ng-bind-html="readItems.name[$index]? readItems.name[$index] : readItem.readName | highlight:search.text" ng-value="readItems.name[$index]? readItems.name[$index] : readItem.readName" ng-change="checkDNA($index)">
+                <input md-maxlength="150" required md-no-asterisk name="name" ng-model="name"  ng-value="readItems.name[$index]? readItems.name[$index] : readItem.readName" ng-change="checkDNA($index)">
             </md-input-container>
             <div>
                 <md-button class="md-primary" style="margin-top: 15px;" ng-click="randomDNA($index)">
@@ -23,20 +20,29 @@
         </div>
 
         <md-input-container class="md-block">
-            <input type="text" md-maxlength="10" class="form-control" ng-model="search" ng-change="searchRead(search, $index)" placeholder="Search" aria-describedby="basic-addon1">
+            <label>Search</label>
+            <input type="text" md-maxlength="10" name="search" class="form-control" ng-value="readItems.search[$index]? readItems.search[$index] : readItem.search" ng-model="search" ng-change="searchRead(search, $index)" aria-describedby="basic-addon1">
         </md-input-container>
     </md-card-content>
-    <md-card-footer ng-if="total[$index] && positions[$index]['current_position']">
-        <span>Found: {{total[$index]}}</span>
-        <br />
-        <span>
-                {{ positions[$index]['text'] }}
-                <md-button style="cursor: pointer;" class="md-fab md-mini md-primary" ng-click="prevOccurence(search, $index, positions[$index]['current_position'], positions[$index]['counter'])">
-                    <md-icon>undo</md-icon>
-                </md-button>
-                <md-button style="cursor: pointer;" class="md-fab md-mini md-primary" ng-click="nextOccurence(search, $index, positions[$index]['current_position'], positions[$index]['counter'])">
-                    <md-icon>redo</md-icon>
-                </md-button>
-            </span>
+    <md-card-footer>
+        <div ng-if="total[$index] && positions[$index]['current_position']" style="width: 80%; float: left;">
+            <span>Found: {{total[$index]}}</span>
+            <br />
+            <span>
+            {{ positions[$index]['text'] }}
+            <md-button style="cursor: pointer;" class="md-fab md-mini md-primary" ng-click="prevOccurence(search, $index, positions[$index]['current_position'], positions[$index]['counter'])">
+                <md-icon>undo</md-icon>
+            </md-button>
+            <md-button style="cursor: pointer;" class="md-fab md-mini md-primary" ng-click="nextOccurence(search, $index, positions[$index]['current_position'], positions[$index]['counter'])">
+                <md-icon>redo</md-icon>
+            </md-button>
+        </span>
+        </div>
+
+        <div style="float: right">
+            <md-button style="cursor: pointer;" class="margin-left-20 md-fab md-mini md-primary" ng-click="removeRead($index)">
+                <md-icon>delete</md-icon>
+            </md-button>
+        </div>
     </md-card-footer>
 </md-card>
