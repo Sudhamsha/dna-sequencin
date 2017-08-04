@@ -24,6 +24,7 @@ angular.module('myApp.dnaSequencing', ['ngRoute'])
 
 
         $scope.addReadItems = function(e) {
+            console.log("h");
             $scope.items.push({
                 "readName": "",
             });
@@ -82,7 +83,7 @@ angular.module('myApp.dnaSequencing', ['ngRoute'])
         $scope.nextOccurence = function (search, index, currentPosition, counter) {
             if(counter + 1 <= $scope.total[index]){
                 $scope.positions[index]['counter'] = counter + 1;
-                $scope.positions[index]['text'] = "#"+$scope.positions[index]['counter'] +" at " + $scope.items[index].readName.indexOf(search, currentPosition+1);
+                $scope.positions[index]['text'] = "#"+$scope.positions[index]['counter'] +" at position" + $scope.items[index].readName.indexOf(search, currentPosition+1);
                 $scope.positions[index]['current_position'] = $scope.items[index].readName.indexOf(search, currentPosition+1);
             }
 
@@ -92,7 +93,7 @@ angular.module('myApp.dnaSequencing', ['ngRoute'])
         $scope.prevOccurence = function (search, index, currentPosition, counter) {
             if(counter - 1 != 0){
                 $scope.positions[index]['counter'] = counter - 1;
-                $scope.positions[index]['text'] = "#"+$scope.positions[index]['counter'] +" at " + $scope.items[index].readName.lastIndexOf(search, currentPosition-1);
+                $scope.positions[index]['text'] = "#"+$scope.positions[index]['counter'] +" at position: " + $scope.items[index].readName.lastIndexOf(search, currentPosition-1);
                 $scope.positions[index]['current_position'] = $scope.items[index].readName.lastIndexOf(search, currentPosition-1);
             }
         };
@@ -105,4 +106,12 @@ angular.module('myApp.dnaSequencing', ['ngRoute'])
 
         // Initialise on load
         $scope.init();
-    }]);
+    }])
+    .filter('highlight', function($sce) {
+        return function(text, phrase) {
+            if (phrase) text = text.replace(new RegExp('('+phrase+')', 'gi'),
+                '<span class="highlighted">$1</span>')
+
+            return $sce.trustAsHtml(text)
+        }
+    })

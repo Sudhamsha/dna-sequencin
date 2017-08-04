@@ -3,7 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
-  'ui.bootstrap',
+  'ngMaterial',
   'myApp.view1',
   'myApp.view2',
   'myApp.dnaSequencing',
